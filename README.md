@@ -10,8 +10,8 @@ because why would that be useful?
 tuplates is a simple way to template your static sites, without creating a
 dependency on your templating tool. Rather than replacing your template tags,
 it works by replacing lines between your template tags. This means that both
-your template and code live together in you files. When you need to make a 
-change, you update the fragment and re-run tuplate, and it replaces the old
+your template and code live together in your files. When you need to make a 
+change, you update the fragment and re-run tuplates, and it replaces the old
 code. This way you can check your actual code into source control, rather than
 your templates.
 
