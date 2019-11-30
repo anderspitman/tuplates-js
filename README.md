@@ -15,6 +15,8 @@ change, you update the fragment and re-run tuplates, and it replaces the old
 code. This way you can check your actual code into source control, rather than
 your templates.
 
+The name comes from "update templates".
+
 
 # Installation
 
@@ -140,3 +142,12 @@ const data = {
 
 console.log(data);
 ```
+
+If you re-run it again, the result is the same, even though there's already
+code between the tuplate tags. It simply replaces whatever is in there (if
+there is anything).
+
+Note that this README was partially generated with tuplates (see the Markdown
+tuplates in this project's `tuplates` directory). Unfortunately it takes some
+manual intervention to work, in part because tuplates doesn't currently support
+nesting.
