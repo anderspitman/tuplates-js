@@ -22,7 +22,6 @@ your templates.
 npm install -g tuplates
 ```
 
-
 # Usage
 
 Create a `tuplates` directory containing your fragments as files. You can
@@ -40,12 +39,16 @@ project_directory/
 
 Insert tuplate tags as comments in your code:
 
+<!-- tuplate_start(index.html.md) -->
 ```html
 <!-- index.html -->
 <!doctype html>
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>tuplates</title>
+
   </head>
 
   <body>
@@ -53,11 +56,69 @@ Insert tuplate tags as comments in your code:
     <!-- tuplate_end() -->
 
     <main>
+      <h1>My Awesome Content</h1>
     </main>
 
     <!-- tuplate_start(footer.html) -->
     <!-- tuplate_end() -->
+  </body>
 
+</html>
+```
+
+<!-- tuplate_end() -->
+
+<!-- tuplate_start(index.js.md) -->
+```javascript
+// index.js
+console.log("Hi there");
+
+// tuplate_start(data.js)
+// tuplate_end()
+
+console.log(data);
+```
+
+<!-- tuplate_end() -->
+
+Run the `tuplates` command in the directory above the `tuplates` directory.
+It will walk the directory and replace the lines between the tags with the
+tuplates.
+
+After running once, the source files look like this:
+
+```html
+<!-- index.html -->
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>tuplates</title>
+
+  </head>
+
+  <body>
+    <!-- tuplate_start(header.html) -->
+    <!-- tuplates/header.html -->
+    <div class='header'>
+      <h1>My Awesome Header</h1>
+    </div>
+    
+    
+    <!-- tuplate_end() -->
+
+    <main>
+      <h1>My Awesome Content</h1>
+    </main>
+
+    <!-- tuplate_start(footer.html) -->
+    <!-- tuplates/footer.html -->
+    <div class='footer'>
+      <h1>Awesome Footer</h1>
+    </div>
+    
+    <!-- tuplate_end() -->
   </body>
 
 </html>
@@ -65,13 +126,17 @@ Insert tuplate tags as comments in your code:
 
 ```javascript
 // index.js
-const data =
-  // tuplate_start(data.txt)
-  // tuplate_end()
-;
+console.log("Hi there");
 
+// tuplate_start(data.js)
+// tuplates/data.js
+const data = {
+  a: 1,
+  b: 2,
+  c: 3,
+};
+
+// tuplate_end()
+
+console.log(data);
 ```
-
-Run the `tuplates` command in the directory above the `tuplates` directory.
-It will walk the directory and replace the lines between the tags with the
-tuplates.

@@ -19,10 +19,15 @@ const doTuplate = require('./tuplates.js');
 
   async function walkReplace(dirPath, tuplates) {
 
+    if (dirPath.startsWith('.') && dirPath != './') {
+      return;
+    }
+
     const dir = await fs.promises.readdir(dirPath);
 
     for (filename of dir) {
       const childPath = path.join(dirPath, filename);
+
       if (childPath === tuplateDir) {
         continue;
       }

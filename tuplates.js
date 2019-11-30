@@ -42,12 +42,15 @@ function doTuplate(filePath, text, tuplates) {
 
       const endTemplateName = endMatch[1];
 
-      for (let tupLine of tuplates[tuplateName].split('\n')) {
-        for (let i = 0; i < numSpaces; i++) {
-          tupLine = ' ' + tupLine;
+      if (tuplates[tuplateName]) {
+        for (let tupLine of tuplates[tuplateName].split('\n')) {
+          for (let i = 0; i < numSpaces; i++) {
+            tupLine = ' ' + tupLine;
+          }
+          outLines.push(tupLine);
         }
-        outLines.push(tupLine);
       }
+
       tuplateName = '';
       numSpaces = 0;
 
