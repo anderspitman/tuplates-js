@@ -2,6 +2,7 @@ const tuplateStartRe = /.*tuplate_start\((.+)\).*/g;
 const tuplateEndRe = /.*tuplate_end\(\).*/g;
 
 function doTuplate(filePath, text, tuplates) {
+
   const lines = text.split('\n');
 
   let replacing = false;
@@ -48,6 +49,11 @@ function doTuplate(filePath, text, tuplates) {
             tupLine = ' ' + tupLine;
           }
           outLines.push(tupLine);
+        }
+
+        // if last line is whitepsace, remove it
+        if (outLines[outLines.length - 1].match(/\s/g)) {
+          outLines.pop();
         }
       }
 
