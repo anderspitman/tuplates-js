@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const path = require('path');
 const doTuplate = require('./tuplates.js');
 
 (async() => {
@@ -19,7 +20,8 @@ const doTuplate = require('./tuplates.js');
 
   async function walkReplace(dirPath, tuplates) {
 
-    if (dirPath.startsWith('.') && dirPath != './') {
+    const baseName = path.basename(dirPath);
+    if (baseName.startsWith('.') && baseName !== '.') {
       return;
     }
 
@@ -34,10 +36,12 @@ const doTuplate = require('./tuplates.js');
       const stats = await fs.promises.stat(childPath);
 
       if (stats.isFile()) {
-        const fileText = await fs.promises.readFile(childPath, 'utf8');
-        // TODO: stream the files
-        const newText = doTuplate(childPath, fileText, tuplates);
-        await fs.promises.writeFile(childPath, newText);
+        if (isValidType(childPath)) {
+          const fileText = await fs.promises.readFile(childPath, 'utf8');
+          // TODO: stream the files
+          const newText = doTuplate(childPath, fileText, tuplates);
+          await fs.promises.writeFile(childPath, newText);
+        }
       }
       else {
         walkReplace(childPath, tuplates);
@@ -64,3 +68,11 @@ const doTuplate = require('./tuplates.js');
     return tuplates;
   }
 })();
+
+const validExts = [
+  '.js', '.html', '.css'
+];
+
+function isValidType(filePath) {
+  return -1 !== validExts.indexOf(path.extname(filePath));
+}
